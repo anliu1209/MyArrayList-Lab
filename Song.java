@@ -40,9 +40,7 @@ public class Song {
         }
 
         Song other = (Song) o;
-        return sameText(name, other.getName())
-                && sameText(artist, other.getArtist())
-                && sameText(album, other.getAlbum());
+        return sameText(name, other.getName()) && sameText(artist, other.getArtist()) && sameText(album, other.getAlbum());
     }
 
     private boolean sameText(String first, String second) {
