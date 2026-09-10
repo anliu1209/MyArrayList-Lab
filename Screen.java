@@ -4,17 +4,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Screen extends JPanel implements ActionListener {
-    JTextField nameField;
-    JTextField artistField;
-    JTextField albumField;
-    JTextField locationField;
-    MyArrayList<Song> playlist;
+    private JTextField nameField, artistField, albumField, locationField;
+    private JButton btnAdd,btnRemoveLoc, btnRemoveDet, btnSort, btnRand;
 
-    JButton btnAdd;
-    JButton btnRemoveLoc;
-    JButton btnRemoveDet;
-    JButton btnSort;
-    JButton btnRand;
+    private MyArrayList<Song> playlist;
 
     public Screen() {
         playlist = new MyArrayList<Song>();
@@ -44,7 +37,6 @@ public class Screen extends JPanel implements ActionListener {
         add(albumField);
         add(new JLabel("Location:"));
         add(locationField);
-
         add(btnAdd);
         add(btnRemoveLoc);
         add(btnRemoveDet);
@@ -76,12 +68,7 @@ public class Screen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getSource() == btnAdd) {
-                String name = nameField.getText();
-                String artist = artistField.getText();
-                String album = albumField.getText();
-                int location = Integer.parseInt(locationField.getText()) - 1;
-                
-                playlist.add(location, new Song(name, artist, album));
+                playlist.add(Integer.parseInt(locationField.getText()) - 1, new Song(nameField.getText(), artistField.getText(), albumField.getText()));
 
                 nameField.setText("");
                 artistField.setText("");
@@ -89,18 +76,12 @@ public class Screen extends JPanel implements ActionListener {
                 locationField.setText("");
             } 
             else if (e.getSource() == btnRemoveLoc) {
-                int location = Integer.parseInt(locationField.getText()) - 1;
-                playlist.remove(location);
+                playlist.remove(Integer.parseInt(locationField.getText()) - 1);
                     
                 locationField.setText("");
             } 
             else if (e.getSource() == btnRemoveDet) {
-                String name = nameField.getText();
-                String artist = artistField.getText();
-                String album = albumField.getText();
-                Song temp = new Song(name, artist, album);
-                
-                playlist.remove(temp);
+                playlist.remove(new Song(nameField.getText(), artistField.getText(), albumField.getText()));
 
                 nameField.setText("");
                 artistField.setText("");
@@ -110,6 +91,7 @@ public class Screen extends JPanel implements ActionListener {
                 for (int i = 0; i < playlist.size() - 1; i++) {
                     int min = i;
                     for (int j = i + 1; j < playlist.size(); j++) {
+
                         String s1 = playlist.get(j).toString().toLowerCase();
                         String s2 = playlist.get(min).toString().toLowerCase();
                         

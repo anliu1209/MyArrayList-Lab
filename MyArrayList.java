@@ -14,7 +14,6 @@ public class MyArrayList<E> {
         return true;
     }
 
-    /** Adds an element at a zero-based index. */
     public void add(int index, E element) {
         checkPositionIndex(index);
         ensureCapacity();
@@ -46,7 +45,6 @@ public class MyArrayList<E> {
         return removed;
     }
 
-    /** Removes the first element equal to target. */
     public boolean remove(Object target) {
         for (int i = 0; i < size; i++) {
             Object current = list[i];
